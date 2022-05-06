@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<menuitem id="menu_root" name="ISO_9001"/>
+
+<menuitem id="sous_menu_gestion_plaint_root" name="Géstion Des Réclamations" parent="menu_root" sequence='1' />
+
+<menuitem id="sous_menu_evaluation_fournisseur_root" name="Evaluation Fournisseurs" parent="menu_root" sequence='5'/>
+
+<menuitem id="sous_menu_gestion_competance_root" name="Géstion des compétence" parent="menu_root" sequence='4' />
+
+<menuitem id="sous_menu_objectif_qualiter_root" name="Géstion Des Objectifs Qualité" parent="menu_root" sequence='3'/>
+
+<menuitem id="sous_menu_audits_root" name="Géstion Des Audits" parent="menu_root" sequence='2'/>
+
+<menuitem id="sous_menu_documents_root" name="Géstion Des Documents" parent="menu_root" sequence='6' />
+
+
+<menuitem id="sous_menu_ressource_humains_root" name="Ressources humaines" parent="menu_root" sequence='7'/>
+
+<menuitem id="sous_menu_configuration" name="Configuration" parent="menu_root" sequence='8'/>
+</data>
+</openerp>

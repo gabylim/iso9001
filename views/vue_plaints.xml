@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+
+
+<!--______________vue graphe plaint______________-->
+
+<record id="plaint_graph_view" model="ir.ui.view">
+	<field name="name">views_graph_graph</field>
+	<field name="model">crm.claim</field>
+	<field name="arch" type="xml">
+    <graph>
+        <field name="stage_id" string="Etat"/>
+	</graph>	
+	</field>
+</record>
+
+
+
+<record model="ir.actions.act_window" id="actions_vues_plaint">
+    <field name="name">plaint_action</field>
+    <field name="res_model">crm.claim</field>
+    <field name = "inherit_id" ref ="crm_claim.crm_case_categ_claim0" />
+  
+    <field name="view_mode">tree,form,calendar,graph</field>
+ </record>
+
+
+
+
+
+
+
+
+<menuitem id="plaint" name="Réclamations" parent="sous_menu_gestion_plaint_root" action="actions_vues_plaint" />
+
+
+</data>
+</openerp>

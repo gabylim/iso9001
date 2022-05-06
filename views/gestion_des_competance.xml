@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<!--vu liste  et formulaire des fonction__________________________________________________________-->
+
+
+
+<record id="fonctionlisteviewe" model="ir.ui.view">
+        <field name="name">fonction_form</field> 
+        <field name="model">fonctions</field> 
+        <field name="arch" type="xml">
+        
+ <search> 
+                    <field  name = "name" /> 
+                   
+<filter name = "my_courses" string = "Mes cours"
+ domain = "[('name', '=', 'fonction1')] " />
+ 
+  
+  
+ </search> 
+
+
+
+
+
+
+
+
+
+
+
+
+        </field> 
+ </record> 
+ 
+
+<record id="fonctionlisteview" model="ir.ui.view">
+        <field name="name">fonction_liste</field> 
+        <field name="model">fonctions</field> 
+        <field name="arch" type="xml">
+        <tree>
+       
+        <field name="name"/>
+       
+
+        </tree>
+        </field> 
+ </record> 
+<!--______________________________________form fonction_______________________________-->
+ <record id="fonctionformview" model="ir.ui.view">
+        <field name="name">fonctiions_formulaire</field> 
+        <field name="model">fonctions</field>
+
+        <field name="arch" type="xml">
+        <form>
+        <sheet>
+                  <div class="row">
+                     <div class="col-sm-8 col-xs-6">
+                        <group><field name="name"/></group>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-8 col-xs-6">
+                        <group><field name="services_fonc_id" string='service'/></group>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-8 col-xs-6">
+                        <group><field name="departement_id" string='departement'/></group>
+                     </div>
+                  </div>
+         
+     <notebook>
+        <page name="namecompetance" string="Competance">
+           <field name="competance_id" />
+        </page>
+     </notebook>
+         
+       
+        </sheet>
+        </form>
+        </field> 
+ </record>  
+<!--__________________________________vue kanban _______________________________________-->
+
+
+
+
+
+
+
+  <!--vue liste et formulaire des conpetances_____________________________________________________-->
+<record id="vuecompetancelist" model="ir.ui.view">
+        <field name="name">competance_liste</field> 
+        <field name="model">competance</field> 
+        <field name="arch" type="xml">
+     
+        <tree>
+      
+            <field name="name_cmp"/>
+            <field name="fonction_ids"/>
+            <field name="type_cmp"/>
+         
+        </tree>
+      
+        </field> 
+ </record> 
+<!--__________________form competence______________________________________________-->
+ <record id="vuecompetanceform" model="ir.ui.view">
+        <field name="name">competance_form</field> 
+        <field name="model">competance</field> 
+    
+        <field name="arch" type="xml">
+
+             <form>
+<!--    <field name = " inherit_id " ref = "fonctionformview" />
+   <xpath  expr = "// field [@ name = 'name']"  position = "after" > -->
+    
+<sheet>
+              
+                  <div class="row">
+                     <div class="col-sm-8 col-xs-6">
+                        <group><field name="name_cmp"/></group>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-8 col-xs-6">
+                        <group><field name="type_cmp"/></group>
+                     </div>
+                  </div>
+                 
+                  <div class="row">
+                     <div class="col-sm-8 col-xs-6">
+                        <group><field name="fonction_ids"/></group>
+                     </div>
+                  </div>
+                  
+ </sheet>               
+              </form>
+               
+        </field> 
+ </record> 
+
+
+ <!--_________________declaration des action________________________________-->
+
+<!--fonction-->
+ <record model="ir.actions.act_window" id="etudiantactionwindow">
+    <field name="name">Géstion des compétence</field>
+    <field name="res_model">fonctions</field>
+    <field name="search_view_id" ref="fonctionlisteviewe"/>
+    <field name="view_mode">tree,form</field>
+ </record>
+
+
+
+
+
+
+
+
+ <!--vue de recherche fonction________________________________________________________________-->
+<!--
+ <record  model = "ir.ui.view"  id = "foction_search_view" > 
+    <field name = "name" > fonction.search </field>
+    <field name = "model" >fonctions</field> 
+    <field name = "arch"  type = "xml" >
+     <search> 
+         <field name = "name" />
+     </search>
+    </field> 
+ </record>
+
+ <record model="ir.actions.act_window" id="recherchefonction">
+    <field name="name">recherche</field>
+    <field name="res_model">fonctions</field>
+    <field name="view_model">tree,form</field>
+    <field name="search_view_id" ref="foction_search_view"/>
+ </record>
+-->
+ <!--_________________________________________________________________________________________-->
+
+
+
+
+  
+
+  <!--competance-->
+  <record model="ir.actions.act_window" id="actioncompetence">
+    <field name="name">Géstion des compétence</field>
+    <field name="res_model">competance</field>
+    <field name="view_mode">tree,form</field>
+ </record>
+
+
+
+
+
+
+
+<menuitem id="fonctioncompetance" name="fonction / compétence" parent="sous_menu_gestion_competance_root" action="etudiantactionwindow" />
+
+<menuitem id="competence" name="competence" parent="sous_menu_gestion_competance_root" action="actioncompetence" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>

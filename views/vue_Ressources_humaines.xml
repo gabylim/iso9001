@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp><data>
+
+<!--_________________________________Menu employes_____________________________________-->
+
+
+
+
+<!--__________________________vue liste________________________-->
+  <!--  
+<record id="hr_employee_tree" model="ir.ui.view">
+         <field name="name">employee.tree</field> 
+         <field name="model">hr.employee</field>
+          <field name="type">tree</field>
+        
+         <field name = "inherit_id" ref ="hr.view_employee_tree" />
+         <field name="arch" type="xml">
+        <xpath  expr = "// field [@name ='job_id']"  position = "before" >
+             
+                    <field name="fonction_ids" />
+       
+            </xpath>
+
+            
+         </field> 
+ </record> -->
+<!--_____________________________________________vue formulaire___________-->
+ <record id="hr_employee_form" model="ir.ui.view">
+         <field name="name">employee.form</field> 
+         <field name="model">hr.employee</field>
+         <field name="type">form</field>
+        
+         <field name = "inherit_id" ref ="hr.view_employee_form" />
+         <field name="arch" type="xml">
+          <xpath  expr = "/form/sheet/notebook/page[@string='HR Settings']" position = "before" >
+               <page name="name" string="Competance">
+                    <field  name="competance_employee_ids" />
+
+               </page>
+        
+       
+           </xpath>
+
+           <xpath  expr = "// field [@name ='job_id']"  position = "before" >
+             
+                    <field name="employees_ids" />
+       
+            </xpath>
+         </field> 
+ </record> 
+
+
+<!--_____________________________vue form fournisseur _________________-->
+
+<record id="vue_fournisseur_form" model="ir.ui.view">
+         <field name="name">fournisseur.form</field> 
+         <field name="model">res.partner</field>
+         <field name="type">form</field>
+        
+         <field name = "inherit_id" ref ="base.view_partner_form" />
+         <field name="arch" type="xml">
+          <xpath  expr = "/form/sheet/notebook/page[@string='Sales &amp; Purchases']" position = "before" >
+               <page name="names" string="Evaluation" attrs="{'invisible':[('supplier', '=', False)]} ">
+                <h2 class="text-info">Hisorique des évaluations</h2>
+                 
+              <field name="evaluation_ids" />  
+
+               </page>
+        
+       
+           </xpath>
+
+          </field> 
+ </record> 
+
+<!--_________________________auditeurs_________________________________-->
+
+<record id="view_liste_auditeurs_audits" model="ir.ui.view">
+        <field name="name">auditeurs_liste</field> 
+        <field name="model">auditeurs</field> 
+        <field name="arch" type="xml">
+        <tree>
+             <field name='name' string="Nom et Prenom"/>
+           
+       
+
+        </tree>
+        </field> 
+ </record> 
+<!--__________________________________search auditeur________________________-->
+
+
+<record id="auditeur_search_view" model="ir.ui.view">
+        <field name="name">views_auditeur_search</field> 
+        <field name="model">auditeurs</field> 
+        <field name="arch" type="xml">
+        <search string="cherche auditeur"> 
+
+                <field name="name" filter_domain="['|', ('name','ilike',self), ('name','ilike',self)]"/>
+                
+	</search>
+        </field>
+ </record>
+
+
+ <!--_______________________kanban auditeur_____________________________________-->
+
+
+
+
+<record id="auditeur_kanban_view" model="ir.ui.view">
+	<field name="name">views_auditeur_kanban</field>
+	<field name="model">auditeurs</field>
+	<field name="arch" type="xml">
+	<kanban class="o_res_partner_kanban">
+         <field name="image_small"/>
+         <field name="name"/>
+         
+         <templates>
+		<t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                    <div class="oe_kanban_vignette oe_semantic_html_override">
+                        <a type="open"><img t-att-src="kanban_image('auditeurs', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+			<div class="oe_kanban_details">
+			<h4><a type="open"><field name="name"/></a></h4>
+			</div>
+                     </div>
+		</div>   
+			</t>
+		</templates>
+		</kanban>
+	</field>
+</record>
+
+
+<!--__________________________form tout_audits _________________________-->
+
+
+<record id="view_form_auditeurs" model="ir.ui.view">
+        <field name="name">auditeurs_formulaire</field> 
+        <field name="model">auditeurs</field>
+        <field name="arch" type="xml">
+        <form>
+        <sheet>
+                <group>
+                        <field name="name" string="Nom et Prenom"/>
+                        <field name='email' string='Email'/>
+                </group>
+           
+        </sheet>
+        </form>
+        </field> 
+</record>  
+
+
+<!--___________________________action auditeurs____________________________-->
+
+
+<record model="ir.actions.act_window" id="actions_vues_auditeurs">
+    <field name="name">auditeurs_action</field>
+    <field name="res_model">auditeurs</field>
+  
+    <field name="view_mode">tree,form,kanban</field>
+ </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<menuitem id="employees" name="Employés" parent="sous_menu_ressource_humains_root" action="hr.open_view_employee_list_my" />
+<menuitem id="fournisseurss" name="Fournisseurs" parent="sous_menu_ressource_humains_root" action="base.action_partner_supplier_form" />
+<menuitem id="auditeurs" name="Auditeurs" parent="sous_menu_ressource_humains_root" action="actions_vues_auditeurs"/>
+<menuitem id="clients" name="Clients" parent="sous_menu_ressource_humains_root" action="base.action_partner_customer_form" />
+
+
+
+
+ 
+
+ 
+
+</data></openerp>

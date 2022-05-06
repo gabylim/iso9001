@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+<!--______________objectif qualité mensuel__________________-->
+
+
+<record id="view_liste_objectif_qualiter_mensuel" model="ir.ui.view">
+        <field name="name">qualiter_mensuel_liste</field> 
+        <field name="model">objectif.qualite.mensuel</field> 
+        <field name="arch" type="xml">
+        <tree>
+                <field name="mois_annee_id" string="Date" />
+                <field name="descriptions" string="Description"/>
+                <field name="valeur" string="Note --/20" />
+        </tree>
+        </field> 
+ </record> 
+
+ 
+
+<!--___________________vue formulaire qualité mensuel______________-->
+
+
+<record id="view_form_objectif_qualiter_mensuel" model="ir.ui.view">
+        <field name="name">objectif_mensuel_formulaire</field> 
+        <field name="model">objectif.qualite.mensuel</field>
+
+        <field name="arch" type="xml">
+        <form>
+        <sheet>
+                
+                <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-7 col-xs-7">
+                                <group><field name="descriptions" string="Description"/></group>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-7 col-xs-7">
+                                <group><field name="mois_annee_id" string="Date" /></group>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-7 col-xs-7">
+                                <group><field name="valeur" string="Note --/20" /></group>
+                        </div>
+                </div>
+                
+        
+         
+    </sheet>
+        </form>
+        </field> 
+ </record>  
+
+
+<!--_________action objectif mensuel_________-->
+
+
+<record model="ir.actions.act_window" id="actions_vues_objectif_qualite_mensuel">
+    <field name="name">objectif_qualiteer_mensuel</field>
+    <field name="res_model">objectif.qualite.mensuel</field>
+  
+    <field name="view_mode">tree,form</field>
+ </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--___________________________objectif qualité___________________________________________-->
+
+
+
+
+<record id="view_liste_objectif_qualiter" model="ir.ui.view">
+        <field name="name">qualiter_liste</field> 
+        <field name="model">objectif.qualite</field> 
+        <field name="arch" type="xml">
+        <tree>
+
+
+        <field name="daate_id" string="Année"/>
+        <field name="date" string="Date" />
+        <field name="servicees_id" string="Service"/>
+        <field name="description" string="Description" />
+        <field name="note_id" string="Note --/20" />
+         
+        
+        
+        
+
+        </tree>
+        </field> 
+ </record> 
+
+ 
+
+<!--___________________vue formulaire qualité______________-->
+
+
+<record id="view_form_objectif_qualiter" model="ir.ui.view">
+        <field name="name">objectif_formulaire</field> 
+        <field name="model">objectif.qualite</field>
+
+        <field name="arch" type="xml">
+        <form>
+        <sheet>
+        
+                 <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " >
+                            <group>  <field name="servicees_id" string="Service"/></group>
+                      
+                        </div>      
+                 </div>
+             
+                 <div class="row"> 
+                     <div class="col-lg-11 col-md-10 col-sm-10 col-xs-10" >   
+                        <group><field name="description" string="Description" /></group>
+                      </div>
+                  </div> 
+                        
+
+                        <notebook>
+                                <h3 class="text-info">Listes des objectif mensuel attient</h3>
+                                <page name="page01" string="Objectifs mensuel">
+                                        <field name="objectif_qualiter_mensuel_ids" />
+                                </page>
+                        </notebook>
+
+                        <group><field name="note_id" string="Note --/20" /></group>        
+        </sheet>
+        </form>
+        </field> 
+ </record>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--_________action objectif _________-->
+
+
+<record model="ir.actions.act_window" id="actions_vues_objectif_qualite">
+    <field name="name">objectif_qualiteer</field>
+    <field name="res_model">objectif.qualite</field>
+    <field name="view_mode">tree,form</field>
+ </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--_______________________objectif qualité annuel________________________________________-->
+
+
+<record id="view_liste_objectif_qualiter_annuel" model="ir.ui.view">
+        <field name="name">qualiter_annuel_liste</field> 
+        <field name="model">objectif.qualite.annuel</field> 
+        <field name="arch" type="xml">
+        <tree>
+       
+         <field name="date_id" string="Années"/>
+       
+
+        </tree>
+        </field> 
+ </record> 
+
+ 
+
+<!--vue formulaire qualité annuel-->
+
+
+<record id="view_form_objectif_qualiter_annuel" model="ir.ui.view">
+        <field name="name">objectif_annuel_formulaire</field> 
+        <field name="model">objectif.qualite.annuel</field>
+
+        <field name="arch" type="xml">
+        <form>
+        <sheet>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <field name="image_small" widget="image" class="oe_avatar oe_left"/>
+                </div>
+
+                <div class=" col-lg-offset-1 col-lg-8 col-md-8 col-sm-8 col-xs-6">
+                        <group><field name="date_id" string="Année" /></group>
+                </div>       
+            </div> 
+    
+        
+
+        
+     <!--   <button string="Crée" type="action" name="%(actions_vues_objectif_qualite)d" class="oe_highlight"/>-->
+
+         
+         <notebook>
+                 <page name="page01" string="Objectifs Qualité">
+
+                  <h3  class='text-info'>Liste des objectif qualité par service </h3>
+                    <field name="object_qualite_ids" />     
+                 </page>
+         </notebook>
+    </sheet>
+        </form>
+        </field> 
+ </record>  
+<!--____________________________search objectif annuel_____________________________-->
+
+
+<record id="objectif_search_view" model="ir.ui.view">
+        <field name="name">views_objectif_search</field> 
+        <field name="model">objectif.qualite.annuel</field> 
+        <field name="arch" type="xml">
+        <search string="cherche objectif"> 
+
+                <field name="date_id" filter_domain="['|', ('date_id','ilike',self), ('date_id','ilike',self)]"/>
+                
+	</search>
+        </field>
+ </record>
+
+<!--_______________________________kanban objectif annuel_________________________-->
+
+ <record id="objectif_kanban_view" model="ir.ui.view">
+	<field name="name">views_objectif_kanban</field>
+	<field name="model">objectif.qualite.annuel</field>
+	<field name="arch" type="xml">
+	<kanban class="o_res_partner_kanban">
+         <field name="image_small"/>
+         <field name="date_id"/>
+         
+         <templates>
+		<t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                    <div class="oe_kanban_vignette oe_semantic_html_override">
+                        <a type="open"><img t-att-src="kanban_image('evaluation.fournisseur', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+			<div class="oe_kanban_details">
+			<h4><a type="open"><field name="date_id"/></a></h4>
+			</div>
+                     </div>
+		</div>   
+			</t>
+		</templates>
+		</kanban>
+	</field>
+</record>
+
+<!--_________action objectif annuel_________-->
+
+
+<record model="ir.actions.act_window" id="actions_vues_objectif_qualite_annuel">
+        <field name="name">objectif_qualiteer_annuel</field>
+        <field name="res_model">objectif.qualite.annuel</field>
+  
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="objectif_search_view"/>
+
+ </record>
+
+
+
+<menuitem id="objectif_annuel" name="Objectifs Annuel" parent="sous_menu_objectif_qualiter_root" action="actions_vues_objectif_qualite_annuel" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>

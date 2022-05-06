@@ -1,0 +1,29 @@
+<openerp>
+    <data noupdate="1">
+     <!--Email template -->
+        <record id="email_template_audit" model="email.template">
+            <field name="name">Rappel</field>
+            <field name="model_id" ref="iso_9001.model_tout_audit"/>
+            <field name="email_from">baziz.halim94@gmail.com</field>
+            <field name="email_to">${object.auditeur_interne_id.work_email or object.auditeur_externe_id.email}</field>
+            <field name="mail_server_id">2</field>
+            <field name="subject">Rappel d'audit date</field>
+            <field name="body_html"><![CDATA[            
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+                    <p>Monsieur  ${object.auditeur_interne_id or object.auditeur_externe_id },
+                    <br/>  Nous tenons à vous rappeler que l'audit programmé pour le service ${object.service_id}
+                    est programmé pour la date : ${object.date_id} qui a pour thème : ${object.theme_id}
+                    <br/><br/>
+                    Cordialement
+                    <br/>
+                    <br/>
+                    Nous vous remercions de ne pas répondre à ce message
+                    </p>
+
+                
+                </div> ]]> 
+       </field>
+        </record>
+    </data>
+</openerp>

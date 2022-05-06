@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+<data>
+<!--________________________Evaluation tree__________________________________________-->
+<record id="view_evaluation_form" model="ir.ui.view">
+        <field name="name">view_evaluation_tree</field> 
+        <field name="model">evaluation.fournisseur</field> 
+        <field name="arch" type="xml">
+        <tree>
+      
+            <field  name="fournisseur_ids" string='Fournisseur'/>
+            <field  name="responsable_ids" string='Responsable' />
+            <field  name="evaluateur_ids" string='Evaluateur'/>
+            <field name="datee" string='Date Evaluation'/>
+            <field name="note_id" string='Note /20' />
+
+         </tree>
+        </field> 
+ </record> 
+
+
+<!--___________________________evaluation Form____________________________________-->
+
+
+ <record id="view_evaluation_tree" model="ir.ui.view">
+        <field name="name">views_evaluation_form</field> 
+        <field name="model">evaluation.fournisseur</field> 
+        <field name="arch" type="xml">
+        <form>   
+        <sheet>
+              
+                        <div class="row"><!--cette ligne pour mettre la photo et le champ fournisseur dans la meme ligne-->
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><!--cette colonne pour donner 2/12 de la lifne pour la photo-->
+                                <field name="image_small" widget="image" class="oe_avatar oe_left"/>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6"><!--les 10 col restantes de la ligne je les ai donné au fournisseur -->
+                            <!--le h1 est pour avoir le champ large du fournisseur et aulieur dajouter le label pour le titre fournisseur jai ajouté un placeholder-->
+                                <group><h1><field name="fournisseur_ids" string='Fournisseur'  placeholder="Selectionner un fournisseur" /></h1></group>
+                            </div>
+                        </div>
+
+
+
+<!--donc pour tout les champ restant jai traité chaque champ individuellement :
+chaque champ je lai mis dans sa ligne  pui je traite sa responsivité comme je veux par rapport au colonne
+une autre chose si tu veux que les champs aie la meme longueur remplace class="col-sm-10 col-xs-8" par class="col-lg-12 col-md-12 col-sm-10 col-xs-8" -->
+                
+                
+                <div class="row">   
+                    <div class="col-sm-10 col-xs-8">
+                        <group><field name="datee" string='Date Evaluation'/></group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-10 col-xs-8">
+                        <group><field  name="responsable_ids" string='Responsable' help="Selectioné le responsable du fournisseur parmi la liste des employés"/></group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-10 col-xs-8">
+                        <group><field  name="evaluateur_ids" string='Evaluateur'/></group>
+                    </div>
+                </div>
+    
+           
+
+            <fieldset class="scheduler-border">
+                <h2 > <legend class='text-info'>Critère d'évaluation</legend></h2>
+                <div class="row">
+                    <div class="col-sm-10 col-xs-8">
+                        <group><field  name="prix_id" string='Sur le prix'/></group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-10 col-xs-8">
+                        <group><field  name="delai_id" string='Sur le delai'/></group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-10 col-xs-8">
+                        <group><field  name="qualiter_id" string='Sur la qualité'/></group>
+                    </div>
+                </div>
+
+
+            </fieldset> 
+
+            <fieldset class="scheduler-border"><legend></legend></fieldset>
+            <div class="row">
+                <div class="col-sm-10 col-xs-8">
+                    <group><field name="note_id" string='Note --/20' /></group>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-10 col-xs-8">
+                    <group><field  name="comentaire" string='Comentaire'/></group>
+                </div>
+            </div>
+
+
+        </sheet>
+        </form>
+    </field> 
+ </record> 
+
+<!--_____________________kanban evaluation____________________________________-->
+
+
+
+
+<record id="evaluation_kanban_view" model="ir.ui.view">
+	<field name="name">views_evaluation_kanban</field>
+	<field name="model">evaluation.fournisseur</field>
+	<field name="arch" type="xml">
+		<kanban class="o_res_partner_kanban">
+         <field name="image_small"/>
+         <field name="fournisseur_ids"/>
+         <field name="note_id"/>
+         <field name="datee" />
+         <templates>
+			<t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                    <div class="oe_kanban_vignette oe_semantic_html_override">
+                        <a type="open"><img t-att-src="kanban_image('evaluation.fournisseur', 'image_small', record.id.value)" class="oe_kanban_image"/></a>
+						<div class="oe_kanban_details">
+							<h4>
+                                <a type="open"><field name="fournisseur_ids"/></a>
+							</h4>
+						    <div name="tags"/>
+							<ul>
+								<li>Le :<field name="datee"/></li>
+                                <li>Note :<field name="note_id"/></li>
+							</ul>
+						</div>
+                     </div>
+				</div>   
+			</t>
+		</templates>
+		</kanban>
+	</field>
+</record>
+
+<!--____________________________SEARCH Evaluation______________________________________-->
+
+
+
+
+<record id="evaluation_search_view" model="ir.ui.view">
+        <field name="name">views_evaluation_search</field> 
+        <field name="model">evaluation.fournisseur</field> 
+        <field name="arch" type="xml">
+        
+        <search string="cherche Evaluation"> 
+
+                <field name="fournisseur_ids" filter_domain="['|', ('fournisseur_ids','ilike',self), ('fournisseur_ids','ilike',self)]"/>
+                <field name="responsable_ids" filter_domain="['|', ('responsable_ids','ilike',self), ('responsable_ids','ilike',self)]"/>
+                <field name="evaluateur_ids" filter_domain="['|', ('evaluateur_ids','ilike',self), ('evaluateur_ids','ilike',self)]"/>
+                
+                
+                <group expand="0" string="Regroupé par">
+                    <filter string="Evaluateur" name="evaluateur_ids" context="{'group_by':'evaluateur_ids'}" />
+                    <filter string="Responsable" name="responsable_ids" context="{'group_by':'responsable_ids'}" />
+                    <filter string="Fournisseur" name="fournisseur_ids" context="{'group_by':'fournisseur_ids'}" />
+                </group>
+              
+                   
+            
+
+		</search>
+        </field>
+ </record>
+
+
+<!--________________________calendar evaluation__________________________________-->
+
+
+
+<record id="evaluation_calondar_view" model="ir.ui.view">
+    <field name="name">vue_evaluation_calondar</field>
+    <field name="model">evaluation.fournisseur</field>
+    <field name="arch" type="xml">
+    <calendar string="Calendrier des evaluations" date_start="datee"  color="fournisseur_ids" >
+        <field  name="fournisseur_ids" string='Fournisseur'/>
+        <field  name="responsable_ids" string='Responsable' />
+        <field name="note_id" string='Note /20' />
+            
+    </calendar>
+    </field>
+</record>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--_______________________________action window evaluation_________________________-->
+
+ <record model="ir.actions.act_window" id="actions_vues_evaluation_fournisseur">
+    <field name="name">action_evaluation</field>
+    <field name="res_model">evaluation.fournisseur</field>
+  
+    <field name="view_mode">kanban,calendar,tree,form</field>
+    <field name="search_view_id" ref="evaluation_search_view"/>
+ </record>
+
+
+
+
+
+<menuitem id="evaluation_fournisseur" name="Evaluations" parent="sous_menu_evaluation_fournisseur_root" action="actions_vues_evaluation_fournisseur" />
+
+
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>
